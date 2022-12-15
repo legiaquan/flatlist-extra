@@ -1,4 +1,4 @@
-[![NPM Version][npm-url]
+![npm](https://img.shields.io/npm/v/flatlist-extra)
 
 # React Native Horizontal FlatList
 
@@ -23,15 +23,42 @@ $ npm i flatlist-extra
 ## Usage
 
 ```js
+import {Text, View} from 'react-native';
 import {FlatListExtra} from 'flatlist-extra';
 
 const NameComponent = () => {
-    const data = ['one', 'two', 'three', 'four', 'five', 'six'];
-
-    const renderItem = ({item, row, col}) => {
-        <Text>{item}</Text>;
-    };
-    return <FlatListExtra data={data} numRows={2} renderItem={renderItem} />;
+    const data = [
+        'one',
+        'two',
+        'three',
+        'four',
+        'five',
+        'six',
+        'seven',
+        'eight',
+        'nine',
+    ];
+    const renderItem = ({item}) => (
+        <View style={{width: 100, height: 100, borderWidth: 1}}>
+            <Text
+                style={{
+                    alignSelf: 'center',
+                }}>
+                {item}
+            </Text>
+        </View>
+    );
+    return (
+        <View style={{flex: 1}}>
+            <FlatListExtra
+                data={data}
+                renderItem={renderItem}
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                numRows={2}
+            />
+        </View>
+    );
 };
 ```
 
@@ -44,5 +71,3 @@ item => string;
 ```
 
 -   **numRows** - Number of items in each column
-
-[npm-url]: https://www.npmjs.com/package/flatlist-extra
