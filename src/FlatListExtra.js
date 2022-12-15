@@ -14,7 +14,7 @@ export const FlatListExtra = ({
     let getData = data;
     let getRenderData = renderItem;
 
-    if (numRows) {
+    if (numRows && props.horizontal) {
         getData = chunk(data, numRows);
         getRenderData = ({item: items, key}) => {
             const keys = keyExtractor
