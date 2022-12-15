@@ -1,0 +1,33 @@
+{
+  "name": "flatlist-extra",
+  "version": "1.0.2",
+  "description": "Flatlist extra: add numRows",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legiaquan/flatlist-extra.git"
+  },
+  "keywords": [
+    "flatlist-extra",
+    "flatlist",
+    "react-native",
+    "numRows",
+    "horizontal FlatList with multiple rows",
+    "FlatList horizontal with multiple rows"
+  ],
+  "author": "Le Gia Quan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/legiaquan/flatlist-extra/issues"
+  },
+  "homepage": "https://github.com/legiaquan/flatlist-extra#readme",
+  "dependencies": {
+    "lodash.chunk": "^4.2.0",
+    "prettier": "^2.8.1",
+    "react": "^18.1.0",
+    "react-native": "^0.70.6"
+  }
+}
