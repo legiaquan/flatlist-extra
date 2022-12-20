@@ -63,13 +63,11 @@ const NameComponent = () => {
 };
 ```
 
-## Props
+### Props
 
-Props are inherited form FlatListProps, but with the following changes:
+Props are inherited form [flatlist](https://reactnative.dev/docs/flatlist), but with the following changes:
 
-```js
-item => string;
-```
-
--   **numRows** - Number of items in each column
--   **id** - Id of item
+| Name    | Type                 | Default | Description                                                         |
+| ------- | -------------------- | ------- | ------------------------------------------------------------------- |
+| numRows | `integer`            | 2       | Number of items in each column, `only` work with `horizontal` prop. |
+| id      | `string & undefined` | `null`  | Id of item (only `keyExtractor` operation is undefined)             |

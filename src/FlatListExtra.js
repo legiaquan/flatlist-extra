@@ -11,10 +11,11 @@ export const FlatListExtra = ({
     keyExtractor,
     ...props
 }) => {
+    const keyExtractorDefault = keyExtractor ? keyExtractor : (item, key) => (id ? item[id] : key);
     let getData = data;
     let getRenderData = renderItem;
 
-    if (numRows && props.horizontal) {
+    if (numRows) {
         getData = chunk(data, numRows);
         getRenderData = ({item: items, key}) => {
             const keys = keyExtractor
@@ -46,7 +47,7 @@ export const FlatListExtra = ({
             data={getData}
             renderItem={getRenderData}
             keyExtractor={
-                !numRows ? (item, key) => (id ? item[id] : key) : undefined
+                !numRows ? keyExtractorDefault : undefined
             }
             {...props}
         />
