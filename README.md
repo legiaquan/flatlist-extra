@@ -69,5 +69,5 @@ Props are inherited form [flatlist](https://reactnative.dev/docs/flatlist), but 
 
 | Name    | Type                 | Default | Description                                                         |
 | ------- | -------------------- | ------- | ------------------------------------------------------------------- |
-| numRows | `integer`            | 2       | Number of items in each column, `only` work with `horizontal` prop. |
+| numRows | `integer`            | `null`  | Number of items in each column, `only` work with `horizontal` prop. |
 | id      | `string & undefined` | `null`  | Id of item (only `keyExtractor` operation is undefined)             |
