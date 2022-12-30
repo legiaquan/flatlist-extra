@@ -1,7 +1,6 @@
-import React, {Fragment} from 'react';
+import React, {memo, Fragment} from 'react';
 import {FlatList, View} from 'react-native';
 import chunk from 'lodash.chunk';
-import {isEmpty} from './utils/helper';
 
 export const FlatListExtra = ({
     id,
@@ -11,44 +10,31 @@ export const FlatListExtra = ({
     keyExtractor,
     ...props
 }) => {
-    const keyExtractorDefault = keyExtractor ? keyExtractor : (item, key) => (id ? item[id] : key);
-    let getData = data;
-    let getRenderData = renderItem;
-
-    if (numRows) {
-        getData = chunk(data, numRows);
-        getRenderData = ({item: items, key}) => {
-            const keys = keyExtractor
-                ? items.map((item, row) => keyExtractor(item, row))
-                : [];
-
-            return (
-                <View key={isEmpty(keys) ? keys.join('-') : key}>
-                    {items.map((item, index) => {
-                        let keyItem = index;
-                        if (id) {
-                            keyItem = item[id];
-                        } else if (!isEmpty(keys)) {
-                            keyItem = keys[index];
-                        }
-                        return (
-                            <Fragment key={keyItem}>
-                                {renderItem({item})}
-                            </Fragment>
-                        );
-                    })}
-                </View>
-            );
-        };
-    }
+    const keyExtractorDefault =
+        keyExtractor || ((item, key) => (id ? item[id] : key));
+    const getData = numRows ? chunk(data, numRows) : data;
+    const RenderItemChunk = memo(({item: items, key}) => (
+        <View key={key}>
+            {items.map((item, index) => {
+                const keyItem = id
+                    ? item[id]
+                    : keyExtractor
+                    ? keyExtractor(item, index)
+                    : index;
+                return <Fragment key={keyItem}>{renderItem({item})}</Fragment>;
+            })}
+        </View>
+    ));
 
     return (
         <FlatList
             data={getData}
-            renderItem={getRenderData}
-            keyExtractor={
-                !numRows ? keyExtractorDefault : undefined
+            renderItem={
+                numRows
+                    ? ({item, key}) => <RenderItemChunk item={item} key={key} />
+                    : renderItem
             }
+            keyExtractor={!numRows ? keyExtractorDefault : undefined}
             {...props}
         />
     );

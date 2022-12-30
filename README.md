@@ -4,7 +4,7 @@
 
 <h3>Improved horizontal FlatList for React Native</h3>
 
-Provides the ability to specify number of rows to a horizontal React Native FlatList
+This is a custom FlatList component in React Native, which is a component for rendering lists of items in a scrollable view. It has a few extra features compared to the basic FlatList component.
 
 ## Installation
 
@@ -67,7 +67,9 @@ const NameComponent = () => {
 
 Props are inherited form [flatlist](https://reactnative.dev/docs/flatlist), but with the following changes:
 
-| Name    | Type                 | Default | Description                                                         |
-| ------- | -------------------- | ------- | ------------------------------------------------------------------- |
-| numRows | `integer`            | `null`  | Number of items in each column, `only` work with `horizontal` prop. |
-| id      | `string & undefined` | `null`  | Id of item (only `keyExtractor` operation is undefined)             |
+| Name    | Type                 | Default | Description                                                                                                                                                     |
+| ------- | -------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| numRows | `integer`            | `null`  | It allows you to specify the number of rows to render in each chunk of data (numRows). If numRows is not provided, the entire list of data is rendered at once. |
+| id      | `string & undefined` | `null`  | A string that specifies the key to use for each item in the list. This is used to determine the key prop for each item when rendering them in the list.         |
+
+In addition to these props, the component also accepts any other props that the FlatList component supports. The component uses the chunk function from the lodash library to divide the data array into chunks of the specified size, and then passes each chunk to the renderItem function wrapped in a View component. The keyExtractor function is used to generate a unique key for each item, which is used as the key prop when rendering the item. If no keyExtractor function is provided, a default key extractor is used that generates a key based on the item's id prop or the item's index in the array, if no id prop is available.
